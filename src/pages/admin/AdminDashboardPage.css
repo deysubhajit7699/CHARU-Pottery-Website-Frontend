@@ -1,0 +1,63 @@
+.admin-dashboard {}
+.admin-page-header { margin-bottom: 28px; }
+.admin-page-title { font-size: 30px; font-weight: 300; color: var(--ink); }
+.admin-page-sub { font-size: 14px; color: var(--stone-light); margin-top: 4px; }
+
+/* Stats */
+.stats-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; margin-bottom: 28px; }
+.stat-card {
+  background: var(--white); border-radius: var(--radius-md); padding: 20px;
+  display: flex; align-items: center; gap: 16px; box-shadow: var(--shadow-sm);
+}
+.stat-icon { width: 48px; height: 48px; border-radius: var(--radius-sm); display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+.stat-value { font-size: 22px; font-weight: 700; color: var(--ink); line-height: 1.2; }
+.stat-label { font-size: 12px; color: var(--stone-light); margin-top: 3px; }
+
+/* Sections */
+.dashboard-section { background: var(--white); border-radius: var(--radius-md); padding: 24px; box-shadow: var(--shadow-sm); margin-bottom: 20px; }
+.dash-section-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 16px; }
+.dash-section-title { font-size: 15px; font-weight: 600; color: var(--ink); display: flex; align-items: center; gap: 8px; }
+
+/* Status breakdown */
+.status-breakdown { display: flex; gap: 12px; flex-wrap: wrap; }
+.status-chip {
+  display: flex; align-items: center; gap: 8px;
+  background: var(--parchment); padding: 8px 14px; border-radius: 20px;
+}
+.status-dot { width: 8px; height: 8px; border-radius: 50%; }
+.status-name { font-size: 13px; color: var(--stone); }
+.status-count { font-size: 13px; font-weight: 700; color: var(--ink); }
+
+/* Dashboard cols */
+.dashboard-cols { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+
+/* Table */
+.recent-orders-table {}
+.table-head, .table-row {
+  display: grid; grid-template-columns: 90px 1fr 100px 110px;
+  gap: 12px; padding: 10px 0; align-items: center;
+}
+.table-head { font-size: 11px; text-transform: uppercase; letter-spacing: 0.08em; color: var(--stone-light); border-bottom: 1px solid var(--parchment); }
+.table-row { font-size: 13px; color: var(--stone); border-bottom: 1px solid var(--parchment); }
+.table-row:last-child { border-bottom: none; }
+.table-row:hover { background: var(--parchment); margin: 0 -24px; padding: 10px 24px; border-radius: var(--radius-sm); }
+.mono { font-family: monospace; font-size: 13px; }
+.status-pill {
+  display: inline-block; padding: 3px 10px; border-radius: 12px;
+  font-size: 11px; font-weight: 600;
+}
+
+/* Low stock */
+.low-stock-list { display: flex; flex-direction: column; gap: 12px; }
+.low-stock-item { display: flex; align-items: center; gap: 12px; }
+.low-stock-img { width: 44px; height: 44px; object-fit: cover; border-radius: var(--radius-sm); background: var(--parchment); }
+.low-stock-name { font-size: 13px; font-weight: 500; color: var(--ink); }
+.low-stock-qty { font-size: 12px; font-weight: 500; margin-top: 2px; }
+
+@media (max-width: 1024px) {
+  .stats-grid { grid-template-columns: repeat(2, 1fr); }
+  .dashboard-cols { grid-template-columns: 1fr; }
+}
+@media (max-width: 600px) {
+  .stats-grid { grid-template-columns: 1fr 1fr; }
+}

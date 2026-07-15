@@ -1,0 +1,196 @@
+/* ── Hero ────────────────────────────────────────────────────── */
+.hero {
+  background: var(--sand);
+  border-bottom: 1px solid var(--line);
+  position: relative;
+  overflow: hidden;
+}
+/* subtle mandala watermark */
+.hero::before {
+  content: '';
+  position: absolute; left: -140px; bottom: -140px;
+  width: 420px; height: 420px;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 200 200'%3E%3Cg fill='none' stroke='%23B65A2F' stroke-width='0.8'%3E%3Ccircle cx='100' cy='100' r='96'/%3E%3Ccircle cx='100' cy='100' r='78'/%3E%3Ccircle cx='100' cy='100' r='58'/%3E%3Ccircle cx='100' cy='100' r='36'/%3E%3Cpath d='M100 4v192M4 100h192M32 32l136 136M168 32 32 168'/%3E%3Cpath d='M100 22c14 26 14 130 0 156M100 22c-14 26-14 130 0 156M22 100c26-14 130-14 156 0M22 100c26 14 130 14 156 0'/%3E%3C/g%3E%3C/svg%3E");
+  background-size: contain;
+  opacity: .12;
+  pointer-events: none;
+}
+.hero-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  align-items: center;
+  gap: 56px;
+  min-height: 540px;
+  padding-top: 48px;
+  padding-bottom: 48px;
+}
+@keyframes fadeUp { from { opacity: 0; transform: translateY(24px); } to { opacity: 1; transform: none; } }
+.hero-content { animation: fadeUp .8s ease both; }
+.hero-eyebrow {
+  font-size: 13px; letter-spacing: 0.24em; text-transform: uppercase;
+  color: var(--clay); font-weight: 600; margin-bottom: 18px;
+}
+.hero-title {
+  font-size: clamp(34px, 4.2vw, 54px);
+  line-height: 1.12;
+  font-weight: 700;
+  color: var(--ink);
+  margin-bottom: 20px;
+}
+.hero-subtitle {
+  font-size: 16.5px; color: var(--stone); max-width: 480px;
+  margin-bottom: 32px; line-height: 1.75;
+}
+.hero-cta { display: flex; gap: 14px; flex-wrap: wrap; }
+
+/* Right visual — slow-zoom fading slides */
+.hero-visual {
+  position: relative;
+  aspect-ratio: 5/4.4;
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  box-shadow: var(--shadow-lg);
+  animation: fadeUp .8s .15s ease both;
+}
+@keyframes kenburns { from { transform: scale(1); } to { transform: scale(1.08); } }
+.hero-img {
+  position: absolute; inset: 0;
+  width: 100%; height: 100%; object-fit: cover;
+  opacity: 0;
+  transition: opacity 1.1s ease;
+}
+.hero-img.active { opacity: 1; animation: kenburns 6s linear both; }
+.hero-dots {
+  position: absolute; bottom: 16px; left: 50%; transform: translateX(-50%);
+  display: flex; gap: 8px; z-index: 2;
+}
+.hero-dot {
+  width: 9px; height: 9px; border-radius: 50%;
+  background: rgba(255, 252, 248, .55);
+  transition: all var(--transition);
+}
+.hero-dot.active { background: var(--clay); width: 22px; border-radius: 5px; }
+
+/* ── Story ───────────────────────────────────────────────────── */
+.story { position: relative; }
+.story-grid {
+  display: grid;
+  grid-template-columns: 1fr 1.1fr;
+  gap: 64px;
+  align-items: center;
+}
+.story-title { font-size: clamp(28px, 3vw, 40px); line-height: 1.2; font-weight: 600; margin-bottom: 18px; }
+.story-text { color: var(--stone); margin-bottom: 28px; max-width: 480px; }
+.story-visual {
+  position: relative;
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  box-shadow: var(--shadow-md);
+}
+.story-visual img { width: 100%; aspect-ratio: 4/3; transition: transform .8s ease; }
+.story-visual:hover img { transform: scale(1.04); }
+.story-est {
+  position: absolute; top: 16px; right: 16px;
+  background: rgba(42, 30, 20, .78);
+  color: #F6E8DC;
+  padding: 6px 14px; border-radius: 20px;
+  font-size: 14px; letter-spacing: 0.06em;
+  backdrop-filter: blur(4px);
+}
+
+/* ── Craft badges ────────────────────────────────────────────── */
+.craft-badges { background: var(--parchment); border-block: 1px solid var(--line); }
+.craft-badges-inner {
+  display: flex; justify-content: center; gap: clamp(32px, 8vw, 110px);
+  padding: 44px 24px;
+}
+.craft-badge { text-align: center; }
+.craft-badge-icon {
+  width: 78px; height: 78px;
+  margin: 0 auto 12px;
+  display: flex; align-items: center; justify-content: center;
+  border-radius: 50%;
+  background: var(--white);
+  border: 1.5px solid var(--clay-light);
+  color: var(--clay);
+  box-shadow: var(--shadow-sm);
+  transition: all var(--transition);
+}
+.craft-badge-icon svg { width: 40px; height: 40px; }
+.craft-badge:hover .craft-badge-icon {
+  transform: translateY(-4px) rotate(-3deg);
+  border-color: var(--clay);
+  box-shadow: var(--shadow-md);
+}
+.craft-badge p { font-size: 13.5px; font-weight: 600; color: var(--brown); max-width: 130px; margin: 0 auto; }
+
+/* ── Collections ─────────────────────────────────────────────── */
+.section-center { text-align: center; margin-bottom: 42px; }
+.category-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 24px;
+}
+.category-card {
+  position: relative;
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  aspect-ratio: 4/5;
+  background: var(--parchment);
+  box-shadow: var(--shadow-sm);
+  transition: box-shadow var(--transition), transform var(--transition);
+}
+.category-card:hover { transform: translateY(-5px); box-shadow: var(--shadow-md); }
+.category-card img { width: 100%; height: 100%; transition: transform .7s ease; }
+.category-card:hover img { transform: scale(1.07); }
+.category-overlay {
+  position: absolute; inset: 0;
+  background: linear-gradient(to top, rgba(42, 27, 16, .82), transparent 55%);
+  display: flex; flex-direction: column; justify-content: flex-end;
+  padding: 22px;
+  color: #F6E8DC;
+}
+.category-overlay h3 { font-size: 24px; font-weight: 600; }
+.category-overlay span {
+  font-size: 12px; letter-spacing: .14em; text-transform: uppercase;
+  opacity: 0; transform: translateY(6px);
+  transition: all var(--transition);
+  color: var(--clay-light);
+}
+.category-card:hover .category-overlay span { opacity: 1; transform: none; }
+
+/* ── Workshop / new arrivals ─────────────────────────────────── */
+.workshop-section { background: var(--sand); border-block: 1px solid var(--line); }
+
+/* ── CTA banner ──────────────────────────────────────────────── */
+.cta-banner {
+  background: linear-gradient(135deg, var(--clay-deep), var(--clay-dark));
+  color: #F6E8DC;
+  position: relative; overflow: hidden;
+}
+.cta-banner::after {
+  content: '';
+  position: absolute; right: -80px; top: -80px;
+  width: 300px; height: 300px;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 200 200'%3E%3Cg fill='none' stroke='%23F6E8DC' stroke-width='1'%3E%3Ccircle cx='100' cy='100' r='96'/%3E%3Ccircle cx='100' cy='100' r='70'/%3E%3Ccircle cx='100' cy='100' r='44'/%3E%3Cpath d='M100 4v192M4 100h192M32 32l136 136M168 32 32 168'/%3E%3C/g%3E%3C/svg%3E");
+  background-size: contain;
+  opacity: .14;
+}
+.cta-inner {
+  display: flex; align-items: center; justify-content: space-between;
+  gap: 24px; flex-wrap: wrap;
+  padding-top: 56px; padding-bottom: 56px;
+  position: relative; z-index: 1;
+}
+.cta-title { font-size: clamp(26px, 3vw, 36px); font-weight: 600; margin-bottom: 8px; }
+.cta-sub { opacity: .85; font-size: 15px; }
+.btn-light { background: #F6E8DC; color: var(--clay-deep); }
+.btn-light:hover { background: #fff; transform: translateY(-2px); box-shadow: var(--shadow-md); }
+
+/* ── Responsive ──────────────────────────────────────────────── */
+@media (max-width: 900px) {
+  .hero-grid { grid-template-columns: 1fr; gap: 32px; min-height: 0; }
+  .story-grid { grid-template-columns: 1fr; gap: 32px; }
+  .story-content { order: 2; }
+  .craft-badges-inner { flex-wrap: wrap; gap: 28px; }
+}
