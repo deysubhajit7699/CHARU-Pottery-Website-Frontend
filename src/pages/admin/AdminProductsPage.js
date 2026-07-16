@@ -45,7 +45,7 @@ export default function AdminProductsPage() {
 
   const handleToggleFeatured = async (id, current) => {
     try {
-      await api.patch(`/products/${id}`, { isFeatured: !current });
+      await api.put(`/products/${id}`, { isFeatured: !current });
       setProducts((prev) => prev.map((p) => p._id === id ? { ...p, isFeatured: !current } : p));
       toast.success(current ? 'Removed from featured' : 'Added to featured');
     } catch { toast.error('Failed'); }

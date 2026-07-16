@@ -41,14 +41,18 @@ export default function ProfilePage() {
   const handleAvatarUpload = async (e) => {
     const file = e.target.files[0];
     if (!file) return;
+    if (!file.type.startsWith('image/')) { toast.error('Please choose an image file'); return; }
+    if (file.size > 8 * 1024 * 1024) { toast.error('Image is too large (max 8MB)'); return; }
     const formData = new FormData();
     formData.append('avatar', file);
     try {
-      const { data } = await api.put('/auth/update-avatar', formData, { headers: { 'Content-Type': 'multipart/form-data' } });
+      const { data } = await api.post('/upload/avatar', formData, { headers: { 'Content-Type': 'multipart/form-data' } });
       updateUser(data.data);
       toast.success('Avatar updated!');
-    } catch {
-      toast.error('Failed to upload avatar');
+    } catch (err) {
+      toast.error(err.response?.data?.message || err.response?.data?.error || 'Failed to upload avatar');
+    } finally {
+      e.target.value = '';
     }
   };
 
@@ -61,7 +65,7 @@ export default function ProfilePage() {
     if (Object.keys(errs).length) { setPwdErrors(errs); return; }
     setSaving(true);
     try {
-      await api.put('/auth/change-password', { currentPassword: pwd.currentPassword, newPassword: pwd.newPassword });
+      await api.put('/auth/update-password', { currentPassword: pwd.currentPassword, newPassword: pwd.newPassword });
       toast.success('Password changed successfully!');
       setPwd({ currentPassword: '', newPassword: '', confirmPassword: '' });
       setPwdErrors({});
@@ -76,7 +80,7 @@ export default function ProfilePage() {
     e.preventDefault();
     setSaving(true);
     try {
-      const { data } = await api.post('/auth/address', newAddr);
+      const { data } = await api.post('/auth/addresses', newAddr);
       setAddresses(data.data);
       updateUser({ addresses: data.data });
       setShowAddrForm(false);
@@ -89,9 +93,9 @@ export default function ProfilePage() {
     }
   };
 
-  const handleDeleteAddress = async (idx) => {
+  const handleDeleteAddress = async (addressId) => {
     try {
-      const { data } = await api.delete(`/auth/address/${idx}`);
+      const { data } = await api.delete(`/auth/addresses/${addressId}`);
       setAddresses(data.data);
       updateUser({ addresses: data.data });
       toast.success('Address removed');
@@ -151,14 +155,6 @@ export default function ProfilePage() {
                   <div className="form-group">
                     <label className="form-label">Phone Number</label>
                     <input className="form-input" type="tel" value={profile.phone} onChange={(e) => setProfile({ ...profile, phone: e.target.value })} />
-                  </div>
-                  <div className="form-group">
-                    <label className="form-label">Account Role</label>
-                    <input className="form-input" value={user?.role} disabled style={{ opacity: 0.6, textTransform: 'capitalize' }} />
-                  </div>
-                  <div className="form-group">
-                    <label className="form-label">Member Since</label>
-                    <input className="form-input" value={new Date(user?.createdAt).toLocaleDateString('en-IN', { year: 'numeric', month: 'long', day: 'numeric' })} disabled style={{ opacity: 0.6 }} />
                   </div>
                   <button type="submit" className="btn btn-primary" disabled={saving}>{saving ? 'Saving…' : 'Save Changes'}</button>
                 </form>
@@ -223,7 +219,7 @@ export default function ProfilePage() {
                           <p className="addr-text">{addr.street}, {addr.city}, {addr.state} {addr.postalCode}</p>
                           <p className="addr-text">{addr.country} · {addr.phone}</p>
                         </div>
-                        <button className="btn btn-ghost" style={{ color: 'var(--error)' }} onClick={() => handleDeleteAddress(i)}>
+                        <button className="btn btn-ghost" style={{ color: 'var(--error)' }} onClick={() => handleDeleteAddress(addr._id)}>
                           <FiTrash2 size={15} />
                         </button>
                       </div>
