@@ -9,7 +9,7 @@ const MESSAGES = [
   '🚚 Free Shipping Above ₹999',
   '🏺 Handmade by Indian Artisans',
   '⭐ 20+ Years of Craftsmanship',
-  '🪔 गाँव के कारीगरों द्वारा हस्तनिर्मित',
+  '🪔 From Our Village Workshop to Your Home',
   '🇮🇳 Made in India',
 ];
 
@@ -143,7 +143,7 @@ export default function Navbar() {
           <NavLink to="/products?isFeatured=true" className={() => 'nav-link'}>Bestsellers</NavLink>
           <Link to="/#story" className="nav-link">Artisan Story</Link>
           <Link to="/#collections" className="nav-link">Collections</Link>
-          <Link to="/#contact" className="nav-link">Contact</Link>
+          <Link to="/contact" className="nav-link">Contact</Link>
         </nav>
 
         {/* Search bar */}
@@ -170,7 +170,7 @@ export default function Navbar() {
           <NavLink to="/products?isNewArrival=true" className="mobile-link" onClick={() => setMenuOpen(false)}>New Arrivals</NavLink>
           <NavLink to="/products?isFeatured=true" className="mobile-link" onClick={() => setMenuOpen(false)}>Bestsellers</NavLink>
           <Link to="/#story" className="mobile-link" onClick={() => setMenuOpen(false)}>Artisan Story</Link>
-          <Link to="/#contact" className="mobile-link" onClick={() => setMenuOpen(false)}>Contact</Link>
+          <Link to="/contact" className="mobile-link" onClick={() => setMenuOpen(false)}>Contact</Link>
           {user ? (
             <button className="mobile-link" onClick={handleLogout} style={{ textAlign: 'left', width: '100%', color: 'var(--error)' }}>Sign Out</button>
           ) : (

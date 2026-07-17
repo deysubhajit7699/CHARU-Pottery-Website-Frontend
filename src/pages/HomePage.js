@@ -80,7 +80,7 @@ export default function HomePage() {
         <div className="toran" aria-hidden="true" />
         <div className="hero-grid container">
           <div className="hero-content">
-            <p className="hindi-accent">गाँव की मिट्टी, हाथों का हुनर</p>
+            <p className="hindi-accent">Village clay, shaped by skilled hands</p>
             <p className="hero-eyebrow">Handcrafted · Time-Honored · Since 2004</p>
             <h1 className="hero-title display">
               CHARU: Crafting Handmade Clay Art for Over Two Decades.
@@ -123,7 +123,6 @@ export default function HomePage() {
       <section className="story section" id="story">
         <div className="container story-grid">
           <div className="story-content reveal">
-            <p className="hindi-accent">हमारी विरासत</p>
             <p className="section-eyebrow">Our Craft &amp; Heritage</p>
             <h2 className="story-title display">
               The Artisan's Journey: Over Two Decades of Masterful Craftsmanship
