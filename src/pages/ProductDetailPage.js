@@ -222,7 +222,7 @@ export default function ProductDetailPage() {
                 )}
                 {product.artisan?.name && (
                   <div className="artisan-block">
-                    <p className="hindi-accent">कारीगर की कहानी</p>
+                    <p className="hindi-accent">The Artisan's Story</p>
                     <p className="artisan-label">Artisan</p>
                     <p className="artisan-name display">{product.artisan.name}</p>
                     {product.artisan.location && <p className="artisan-loc">📍 {product.artisan.location}</p>}

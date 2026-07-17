@@ -38,7 +38,7 @@ export default function AdminProductFormPage() {
 
   useEffect(() => {
     if (!isEdit) return;
-    api.get(`/products/id/${id}`)
+    api.get(`/products/${id}`)
       .then(({ data }) => {
         const p = data.data;
         setForm({
@@ -81,6 +81,8 @@ export default function AdminProductFormPage() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     if (!form.name || !form.price || !form.stock) { toast.error('Name, price and stock are required'); return; }
+    if (!form.description) { toast.error('Full description is required'); return; }
+    if (!form.category) { toast.error('Please select a category'); return; }
     setSaving(true);
     try {
       const formData = new FormData();
@@ -113,7 +115,7 @@ export default function AdminProductFormPage() {
       }
       navigate('/admin/products');
     } catch (err) {
-      toast.error(err.response?.data?.message || 'Failed to save product');
+      toast.error(err.response?.data?.message || err.response?.data?.error || 'Failed to save product');
     } finally {
       setSaving(false);
     }
@@ -147,7 +149,7 @@ export default function AdminProductFormPage() {
                 <input className="form-input" value={form.shortDescription} onChange={(e) => set('shortDescription', e.target.value)} placeholder="1-2 line summary shown on cards" />
               </div>
               <div className="form-group span2">
-                <label className="form-label">Full Description</label>
+                <label className="form-label">Full Description *</label>
                 <textarea className="form-input" rows={5} value={form.description} onChange={(e) => set('description', e.target.value)} />
               </div>
               <div className="form-group">
