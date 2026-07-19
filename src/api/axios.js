@@ -2,6 +2,7 @@ import axios from 'axios';
 
 const api = axios.create({
   baseURL: '/api/v1',
+  //  baseURL: 'https://charu-pottery-website-backend.onrender.com/api/v1',
   withCredentials: true,
   headers: { 'Content-Type': 'application/json' },
 });
@@ -21,7 +22,10 @@ api.interceptors.response.use(
   (res) => res,
   async (err) => {
     const original = err.config;
-    if (err.response?.status === 401 && !original._retry) {
+    // Never try token-refresh for auth endpoints themselves (login/register/refresh):
+    // a 401 there means bad credentials, not an expired session.
+    const isAuthCall = /\/auth\/(login|register|refresh-token)/.test(original?.url || '');
+    if (err.response?.status === 401 && !original._retry && !isAuthCall) {
       if (isRefreshing) {
         return new Promise((resolve, reject) => {
           queue.push({ resolve, reject });
