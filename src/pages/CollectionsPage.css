@@ -1,0 +1,11 @@
+.collections-page { padding: 48px 0 72px; }
+.collections-hero { text-align: center; margin-bottom: 56px; }
+.collection-section { margin-bottom: 56px; padding-bottom: 40px; border-bottom: 1px solid var(--line); }
+.collection-section:last-child { border-bottom: none; }
+.collection-title { font-size: 28px; font-weight: 600; color: var(--ink); }
+.collection-count { font-size: 13px; color: var(--stone-light); margin-top: 4px; }
+.collection-empty {
+  color: var(--stone-light); font-size: 14.5px; font-style: italic;
+  background: var(--sand); border: 1px dashed var(--line);
+  border-radius: var(--radius-md); padding: 28px; text-align: center;
+}
