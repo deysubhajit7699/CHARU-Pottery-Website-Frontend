@@ -38,7 +38,6 @@ const CraftIcons = {
 
 export default function HomePage() {
   const [featured, setFeatured] = useState([]);
-  const [newArrivals, setNewArrivals] = useState([]);
   const [categories, setCategories] = useState([]);
   const [loading, setLoading] = useState(true);
   const [slide, setSlide] = useState(0);
@@ -46,13 +45,11 @@ export default function HomePage() {
   useEffect(() => {
     const load = async () => {
       try {
-        const [featRes, newRes, catRes] = await Promise.all([
+        const [featRes, catRes] = await Promise.all([
           api.get('/products/featured'),
-          api.get('/products?isNewArrival=true&limit=4'),
           api.get('/categories'),
         ]);
         setFeatured(featRes.data.data?.slice(0, 4) || []);
-        setNewArrivals(newRes.data.data || []);
         setCategories(catRes.data.data || []);
       } catch (e) {
         console.error(e);
@@ -171,25 +168,6 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* ── New arrivals ─────────────────────────────────── */}
-      {!loading && newArrivals.length > 0 && (
-        <section className="section workshop-section">
-          <div className="container">
-            <div className="section-center reveal">
-              <p className="section-eyebrow">Just In</p>
-              <h2 className="section-title display">From the Artisan's Workshop</h2>
-              <div className="ornament"><span /></div>
-            </div>
-            <div className="product-grid">
-              {newArrivals.map((p) => <ProductCard key={p._id} product={p} />)}
-            </div>
-            <div className="section-center" style={{ marginTop: 36 }}>
-              <Link to="/products?isNewArrival=true" className="btn btn-outline">See All New Arrivals</Link>
-            </div>
-          </div>
-        </section>
-      )}
-
       <div className="village-divider container" aria-hidden="true" />
 
       {/* ── CTA banner ───────────────────────────────────── */}
@@ -199,7 +177,7 @@ export default function HomePage() {
             <h2 className="display cta-title">Made to order, made for you</h2>
             <p className="cta-sub">Many of our pieces can be custom-made. Reach out to discuss a commission.</p>
           </div>
-          <a href="mailto:hello@charu.in" className="btn btn-light">Get in Touch</a>
+          <Link to="/contact" className="btn btn-light">Get in Touch</Link>
         </div>
       </section>
     </div>
