@@ -42,7 +42,6 @@ export default function Footer() {
         <div className="footer-links-group">
           <h4 className="footer-heading">Company</h4>
           <ul>
-            <li><Link to="/#story">Artisan Story</Link></li>
             <li><Link to="/products">Shop All</Link></li>
             <li><a href="mailto:hello@charu.in">Contact Us</a></li>
           </ul>

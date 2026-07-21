@@ -12,9 +12,6 @@ const HERO_SLIDES = [
   'https://images.unsplash.com/photo-1525974160448-038dacadcc71?q=80&w=1200&auto=format&fit=crop',
 ];
 
-const STORY_IMAGE =
-  'https://images.unsplash.com/photo-1578749556568-bc2c40e68b61?q=80&w=1200&auto=format&fit=crop';
-
 /* Hand-drawn craft badge icons */
 const CraftIcons = {
   hands: (
@@ -91,7 +88,7 @@ export default function HomePage() {
             </p>
             <div className="hero-cta">
               <Link to="/products" className="btn btn-primary">Shop Collection</Link>
-              <Link to="/#story" className="btn btn-outline">Meet the Artisan</Link>
+              <Link to="/contact" className="btn btn-outline">Meet the Artisan</Link>
             </div>
           </div>
 
@@ -118,30 +115,6 @@ export default function HomePage() {
           </div>
         </div>
       </section>
-
-      {/* ── Artisan story ────────────────────────────────── */}
-      <section className="story section" id="story">
-        <div className="container story-grid">
-          <div className="story-content reveal">
-            <p className="section-eyebrow">Our Craft &amp; Heritage</p>
-            <h2 className="story-title display">
-              The Artisan's Journey: Over Two Decades of Masterful Craftsmanship
-            </h2>
-            <p className="story-text">
-              Our master artisans, with more than 20 years of experience, hand-throw
-              every piece on a traditional kick-wheel in our workshop. Natural clays,
-              mineral glazes and a wood-fired kiln give each creation its warmth and character.
-            </p>
-            <Link to="/products" className="btn btn-primary">Shop Now</Link>
-          </div>
-          <div className="story-visual reveal">
-            <img src={STORY_IMAGE} alt="Master artisan at the pottery wheel in the workshop" loading="lazy" />
-            <span className="story-est display">est. 2004</span>
-          </div>
-        </div>
-      </section>
-
-      <div className="village-divider container" aria-hidden="true" />
 
       {/* ── Craft badges ─────────────────────────────────── */}
       <section className="craft-badges">
