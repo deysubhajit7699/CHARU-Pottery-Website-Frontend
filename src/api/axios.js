@@ -1,8 +1,8 @@
 import axios from 'axios';
 
 const api = axios.create({
-  baseURL: '/api/v1',
-  //  baseURL: 'https://charu-pottery-website-backend.onrender.com/api/v1',
+  // baseURL: '/api/v1',
+   baseURL: 'https://charu-pottery-website-backend.onrender.com/api/v1',
   withCredentials: true,
   headers: { 'Content-Type': 'application/json' },
 });
