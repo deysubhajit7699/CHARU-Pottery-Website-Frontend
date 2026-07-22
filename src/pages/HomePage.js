@@ -12,9 +12,6 @@ const HERO_SLIDES = [
   'https://images.unsplash.com/photo-1525974160448-038dacadcc71?q=80&w=1200&auto=format&fit=crop',
 ];
 
-const STORY_IMAGE =
-  'https://images.unsplash.com/photo-1578749556568-bc2c40e68b61?q=80&w=1200&auto=format&fit=crop';
-
 /* Hand-drawn craft badge icons */
 const CraftIcons = {
   hands: (
@@ -41,7 +38,6 @@ const CraftIcons = {
 
 export default function HomePage() {
   const [featured, setFeatured] = useState([]);
-  const [newArrivals, setNewArrivals] = useState([]);
   const [categories, setCategories] = useState([]);
   const [loading, setLoading] = useState(true);
   const [slide, setSlide] = useState(0);
@@ -49,13 +45,11 @@ export default function HomePage() {
   useEffect(() => {
     const load = async () => {
       try {
-        const [featRes, newRes, catRes] = await Promise.all([
+        const [featRes, catRes] = await Promise.all([
           api.get('/products/featured'),
-          api.get('/products?isNewArrival=true&limit=4'),
           api.get('/categories'),
         ]);
         setFeatured(featRes.data.data?.slice(0, 4) || []);
-        setNewArrivals(newRes.data.data || []);
         setCategories(catRes.data.data || []);
       } catch (e) {
         console.error(e);
@@ -91,7 +85,7 @@ export default function HomePage() {
             </p>
             <div className="hero-cta">
               <Link to="/products" className="btn btn-primary">Shop Collection</Link>
-              <Link to="/#story" className="btn btn-outline">Meet the Artisan</Link>
+              <Link to="/contact" className="btn btn-outline">Meet the Artisan</Link>
             </div>
           </div>
 
@@ -118,30 +112,6 @@ export default function HomePage() {
           </div>
         </div>
       </section>
-
-      {/* ── Artisan story ────────────────────────────────── */}
-      <section className="story section" id="story">
-        <div className="container story-grid">
-          <div className="story-content reveal">
-            <p className="section-eyebrow">Our Craft &amp; Heritage</p>
-            <h2 className="story-title display">
-              The Artisan's Journey: Over Two Decades of Masterful Craftsmanship
-            </h2>
-            <p className="story-text">
-              Our master artisans, with more than 20 years of experience, hand-throw
-              every piece on a traditional kick-wheel in our workshop. Natural clays,
-              mineral glazes and a wood-fired kiln give each creation its warmth and character.
-            </p>
-            <Link to="/products" className="btn btn-primary">Shop Now</Link>
-          </div>
-          <div className="story-visual reveal">
-            <img src={STORY_IMAGE} alt="Master artisan at the pottery wheel in the workshop" loading="lazy" />
-            <span className="story-est display">est. 2004</span>
-          </div>
-        </div>
-      </section>
-
-      <div className="village-divider container" aria-hidden="true" />
 
       {/* ── Craft badges ─────────────────────────────────── */}
       <section className="craft-badges">
@@ -198,25 +168,6 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* ── New arrivals ─────────────────────────────────── */}
-      {!loading && newArrivals.length > 0 && (
-        <section className="section workshop-section">
-          <div className="container">
-            <div className="section-center reveal">
-              <p className="section-eyebrow">Just In</p>
-              <h2 className="section-title display">From the Artisan's Workshop</h2>
-              <div className="ornament"><span /></div>
-            </div>
-            <div className="product-grid">
-              {newArrivals.map((p) => <ProductCard key={p._id} product={p} />)}
-            </div>
-            <div className="section-center" style={{ marginTop: 36 }}>
-              <Link to="/products?isNewArrival=true" className="btn btn-outline">See All New Arrivals</Link>
-            </div>
-          </div>
-        </section>
-      )}
-
       <div className="village-divider container" aria-hidden="true" />
 
       {/* ── CTA banner ───────────────────────────────────── */}
@@ -226,7 +177,7 @@ export default function HomePage() {
             <h2 className="display cta-title">Made to order, made for you</h2>
             <p className="cta-sub">Many of our pieces can be custom-made. Reach out to discuss a commission.</p>
           </div>
-          <a href="mailto:hello@charu.in" className="btn btn-light">Get in Touch</a>
+          <Link to="/contact" className="btn btn-light">Get in Touch</Link>
         </div>
       </section>
     </div>
